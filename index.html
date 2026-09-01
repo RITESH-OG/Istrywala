@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>इस्त्री वाला रेडियो — Purane Gaane 24x7</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Yatra+One&family=Poppins:wght@400;500;600;700&family=JetBrains+Mono:wght@500;700&family=Baloo+2:wght@600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --awning-red:#B5402C;
+    --awning-red-dark:#8A2E1E;
+    --marigold:#E8A33D;
+    --dust:#C97C5D;
+    --cream:#F3E4C4;
+    --cream-soft:#FBF3E1;
+    --ink:#2B2320;
+    --teal:#3F6B5C;
+    --teal-dark:#2C4B40;
+    --shadow:rgba(20,12,6,0.45);
+    --radius:16px;
+  }
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;height:100%;}
+  body{
+    font-family:'Poppins',sans-serif;
+    color:var(--cream-soft);
+    min-height:100vh;
+    overflow-x:hidden;
+    position:relative;
+    background:#5a3025 url("istry wallpaper.png") center center / cover no-repeat fixed;
+  }
+  @media (prefers-reduced-motion: reduce){
+    *{animation-duration:0.01ms !important; animation-iteration-count:1 !important; transition-duration:0.01ms !important;}
+  }
+
+  /* ---------- BACKGROUND SCENE ---------- */
+  .scene{display:none !important;}
+  .sun{
+    position:absolute; top:-120px; left:50%; transform:translateX(-50%);
+    width:420px; height:420px; border-radius:50%;
+    background:radial-gradient(circle at 50% 50%, #FFE9B0 0%, #F2B24C 45%, rgba(242,178,76,0) 72%);
+    opacity:0.75;
+  }
+  .clothesline{
+    position:absolute; top:14%; left:0; right:0; height:2px; background:rgba(43,35,32,0.5);
+  }
+  .clothesline::before, .clothesline::after{
+    content:''; position:absolute; top:0; width:2px; height:60px; background:rgba(43,35,32,0.5);
+  }
+  .clothesline::before{left:6%;} .clothesline::after{right:8%;}
+  .cloth{
+    position:absolute; top:14%; width:46px; height:60px; border-radius:2px 2px 10px 10px;
+    box-shadow:0 6px 10px var(--shadow);
+    animation:sway 4.5s ease-in-out infinite;
+  }
+  @keyframes sway{0%,100%{transform:rotate(-2deg);}50%{transform:rotate(2deg);}}
+  .cloth:nth-child(1){left:10%; background:#D9695A; animation-delay:0s;}
+  .cloth:nth-child(2){left:18%; background:#4C7A6A; height:48px; animation-delay:.6s;}
+  .cloth:nth-child(3){left:78%; background:#E0B24E; animation-delay:.3s;}
+  .cloth:nth-child(4){left:87%; background:#8A5A8C; height:52px; animation-delay:.9s;}
+
+  .awning{
+    position:absolute; top:0; left:0; right:0; height:120px;
+    background:repeating-linear-gradient(100deg, var(--awning-red) 0 40px, var(--awning-red-dark) 40px 80px);
+    clip-path:polygon(0 0,100% 0,100% 70%,92% 100%,84% 68%,76% 100%,68% 68%,60% 100%,52% 68%,44% 100%,36% 68%,28% 100%,20% 68%,12% 100%,4% 68%,0 78%);
+    box-shadow:0 8px 24px var(--shadow);
+  }
+
+  .buildings{
+    position:absolute; bottom:0; left:0; right:0; height:46%;
+    background:linear-gradient(180deg, rgba(122,59,38,0) 0%, rgba(122,59,38,0.55) 100%);
+  }
+
+  /* ---------- HEADER ---------- */
+  header{
+    position:relative; z-index:5;
+    display:flex; justify-content:space-between; align-items:flex-start;
+    padding:22px 28px; gap:16px; flex-wrap:wrap;
+  }
+  .status-cluster{display:flex; flex-direction:column; gap:8px;}
+  .clock{
+    font-family:'JetBrains Mono',monospace; font-weight:700; font-size:1.5rem;
+    text-shadow:0 2px 8px var(--shadow);
+    letter-spacing:1px;
+  }
+  .online{
+    display:inline-flex; align-items:center; gap:8px; font-size:0.85rem; font-weight:600;
+    background:rgba(20,12,6,0.35); padding:6px 14px; border-radius:999px; width:max-content;
+    backdrop-filter:blur(4px);
+  }
+  .dot{width:9px; height:9px; border-radius:50%; background:#4CD97B; box-shadow:0 0 0 0 rgba(76,217,123,0.6); animation:pulse 1.8s infinite;}
+  @keyframes pulse{
+    0%{box-shadow:0 0 0 0 rgba(76,217,123,0.55);}
+    70%{box-shadow:0 0 0 8px rgba(76,217,123,0);}
+    100%{box-shadow:0 0 0 0 rgba(76,217,123,0);}
+  }
+
+  .nav-cluster{display:flex; flex-direction:column; align-items:flex-end; gap:10px;}
+  .pill-row{display:flex; gap:10px; flex-wrap:wrap; justify-content:flex-end;}
+  .pill{
+    display:inline-flex; align-items:center; gap:8px;
+    padding:10px 18px; border-radius:999px; border:1px solid rgba(255,255,255,0.18);
+    background:rgba(20,12,6,0.4); color:var(--cream-soft); font-weight:600; font-size:0.92rem;
+    cursor:pointer; backdrop-filter:blur(4px); min-height:44px;
+    transition:transform .15s ease, background .15s ease;
+  }
+  .pill:hover{transform:translateY(-2px); background:rgba(20,12,6,0.6); text-decoration:none;}
+  .pill:focus-visible{outline:3px solid var(--marigold); outline-offset:2px;}
+  .pill.accent{background:var(--teal); border-color:transparent;}
+  .pill.accent:hover{background:var(--teal-dark);}
+
+  /* ---------- HERO ---------- */
+  main.hero{
+    position:relative; z-index:5; text-align:center; padding:20px 20px 260px;
+    max-width:920px; margin:0 auto;
+  }
+  .headline{
+    font-family:'Yatra One',cursive; font-size:clamp(2.6rem, 8vw, 5.2rem); line-height:1.08;
+    margin:26px 0 6px; text-shadow:0 6px 22px var(--shadow);
+    color:var(--cream-soft);
+  }
+  .subtitle{
+    font-family:'Baloo 2',sans-serif; font-weight:600; letter-spacing:3px; font-size:0.95rem;
+    text-transform:uppercase; opacity:0.9; margin-bottom:34px;
+  }
+
+  .card{
+    display:flex; align-items:center; gap:14px; text-align:left;
+    background:rgba(20,12,6,0.55); backdrop-filter:blur(6px);
+    border:1px solid rgba(255,255,255,0.12); border-radius:var(--radius);
+    padding:14px 16px; margin:0 auto 14px; max-width:640px;
+    box-shadow:0 10px 26px var(--shadow);
+  }
+  .card .icon{
+    width:44px; height:44px; border-radius:50%; flex:none;
+    display:flex; align-items:center; justify-content:center; font-size:1.3rem;
+  }
+  .card-text{flex:1; min-width:0;}
+  .card-text strong{display:block; font-size:1rem; margin-bottom:2px;}
+  .card-text span{display:block; font-size:0.85rem; opacity:0.85; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
+
+  footer.contact{
+    position:relative; z-index:5; text-align:center; font-size:0.85rem; opacity:0.75;
+    padding-bottom:160px;
+  }
+
+  /* ---------- SONGS PANEL ---------- */
+  .songs-panel{
+    position:fixed; inset:0; z-index:50; background:rgba(15,9,5,0.82); backdrop-filter:blur(6px);
+    display:flex; align-items:center; justify-content:center; padding:20px;
+    opacity:0; pointer-events:none; transition:opacity .2s ease;
+  }
+  .songs-panel.open{opacity:1; pointer-events:auto;}
+  .songs-box{
+    background:var(--cream); color:var(--ink); border-radius:20px; max-width:560px; width:100%;
+    max-height:78vh; overflow-y:auto; padding:22px; box-shadow:0 24px 60px rgba(0,0,0,0.5);
+  }
+  .songs-box h2{font-family:'Baloo 2',sans-serif; margin:0 0 4px; font-size:1.4rem;}
+  .songs-box p.hint{margin:0 0 16px; font-size:0.85rem; opacity:0.7;}
+  .songs-close{
+    float:right; background:var(--awning-red); color:#fff; border:none; border-radius:50%;
+    width:36px; height:36px; font-size:1.1rem; cursor:pointer;
+  }
+  .song-row{
+    display:flex; align-items:center; gap:12px; padding:12px 10px; border-radius:12px; cursor:pointer;
+    transition:background .15s ease;
+  }
+  .song-row:hover{background:rgba(181,64,44,0.1);}
+  .song-row.active{background:rgba(181,64,44,0.18);}
+  .song-num{width:26px; text-align:center; font-family:'JetBrains Mono',monospace; font-weight:700; color:var(--awning-red);}
+  .song-meta strong{display:block; font-size:0.98rem;}
+  .song-meta span{display:block; font-size:0.8rem; opacity:0.65;}
+  .song-row.active .song-meta strong{color:var(--awning-red);}
+
+  /* ---------- PLAYER BAR ---------- */
+  .player-bar{
+    position:fixed; left:16px; right:16px; bottom:16px; z-index:40;
+    max-width:960px; margin:0 auto;
+    background:rgba(18,11,6,0.72); backdrop-filter:blur(14px);
+    border:1px solid rgba(255,255,255,0.1); border-radius:20px;
+    padding:12px 16px; box-shadow:0 20px 50px rgba(0,0,0,0.55);
+    display:grid; grid-template-columns:auto 1fr auto; align-items:center; gap:16px;
+  }
+  .track-info{display:flex; align-items:center; gap:12px; min-width:0;}
+  .art{
+    position:relative; width:52px; height:52px; border-radius:12px; flex:none;
+    background:linear-gradient(135deg, var(--teal), var(--teal-dark));
+    display:flex; align-items:center; justify-content:center;
+  }
+  .iron{width:26px; height:20px;}
+  .steam{position:absolute; top:-14px; left:50%; transform:translateX(-50%); width:22px; height:22px; opacity:0;}
+  .steam span{
+    position:absolute; bottom:0; width:4px; height:4px; border-radius:50%;
+    background:rgba(255,255,255,0.85); filter:blur(1px);
+  }
+  .player-bar.playing .steam{opacity:1;}
+  .player-bar.playing .steam span{animation:rise 2.2s ease-in infinite;}
+  .steam span:nth-child(1){left:2px; animation-delay:0s;}
+  .steam span:nth-child(2){left:9px; animation-delay:.5s;}
+  .steam span:nth-child(3){left:16px; animation-delay:1s;}
+  @keyframes rise{
+    0%{transform:translateY(0) scale(1); opacity:0.9;}
+    100%{transform:translateY(-24px) scale(2.2); opacity:0;}
+  }
+  .track-text{min-width:0;}
+  .track-text .t-title{font-weight:700; font-size:0.95rem; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+  .track-text .t-artist{font-size:0.8rem; opacity:0.7; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;}
+
+  .controls-col{display:flex; flex-direction:column; gap:6px; min-width:0;}
+  .transport{display:flex; align-items:center; justify-content:center; gap:14px;}
+  .ctrl-btn{
+    background:rgba(255,255,255,0.08); border:none; color:var(--cream-soft); cursor:pointer;
+    width:40px; height:40px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+    transition:background .15s ease, transform .15s ease;
+  }
+  .ctrl-btn:hover{background:rgba(255,255,255,0.18); transform:translateY(-1px);}
+  .ctrl-btn:focus-visible{outline:3px solid var(--marigold); outline-offset:2px;}
+  .play-btn{width:48px; height:48px; background:var(--marigold); color:var(--ink);}
+  .play-btn:hover{background:#F3B65A;}
+  .progress-row{display:flex; align-items:center; gap:10px; font-family:'JetBrains Mono',monospace; font-size:0.75rem;}
+  .progress-track{
+    flex:1; height:6px; background:rgba(255,255,255,0.18); border-radius:999px; position:relative; cursor:pointer;
+  }
+  .progress-fill{position:absolute; left:0; top:0; height:100%; background:var(--marigold); border-radius:999px; width:0%;}
+
+  .volume-col{display:flex; align-items:center; gap:8px;}
+  .vol-slider{width:90px; accent-color:var(--marigold); cursor:pointer;}
+
+  /* ---------- TOAST ---------- */
+  .toast{
+    position:fixed; left:50%; bottom:120px; transform:translateX(-50%) translateY(20px);
+    background:var(--ink); color:var(--cream-soft); padding:12px 22px; border-radius:999px;
+    font-size:0.9rem; font-weight:600; z-index:60; opacity:0; pointer-events:none;
+    transition:opacity .25s ease, transform .25s ease; box-shadow:0 10px 30px rgba(0,0,0,0.4);
+    max-width:80vw; text-align:center;
+  }
+  .toast.show{opacity:1; transform:translateX(-50%) translateY(0);}
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width:760px){
+    .player-bar{grid-template-columns:1fr; gap:10px; padding:12px;}
+    .track-info{justify-content:flex-start;}
+    .volume-col{display:none;}
+    header{padding:16px;}
+    .nav-cluster{align-items:flex-start;}
+    .pill-row{justify-content:flex-start;}
+    footer.contact{padding-bottom:210px;}
+    main.hero{padding-bottom:300px;}
+  }
+</style>
+</head>
+<body>
+
+<div class="scene" aria-hidden="true">
+  <div class="sun"></div>
+  <div class="clothesline"></div>
+  <div class="cloth" style="top:14%;"></div>
+  <div class="cloth" style="top:14%;"></div>
+  <div class="cloth" style="top:14%;"></div>
+  <div class="cloth" style="top:14%;"></div>
+  <div class="awning"></div>
+  <div class="buildings"></div>
+</div>
+
+<header>
+  <div class="status-cluster">
+    <div class="clock" id="clock">12:09 PM</div>
+    <div class="online"><span class="dot"></span><span id="onlineCount">312</span> online</div>
+  </div>
+  <div class="nav-cluster">
+    <div class="pill-row">
+      <a class="pill" href="https://open.spotify.com/" target="_blank" rel="noopener noreferrer">🎧 Spotify</a>
+      <a class="pill" href="https://music.youtube.com/" target="_blank" rel="noopener noreferrer">▶ YT Music</a>
+    </div>
+    <div class="pill-row">
+      <button class="pill" id="openSongs">Playlists</button>
+      <button class="pill" id="openSongs2">Songs</button>
+    </div>
+  </div>
+</header>
+
+<main class="hero">
+  <div class="headline">इस्त्री वाला रेडियो</div>
+  <div class="subtitle">Purane Gaane · Old Is Gold · 24×7</div>
+</main>
+
+<footer class="contact">contact: [rk2816195@gmail.com]</footer>
+
+<!-- Songs Modal -->
+<div class="songs-panel" id="songsPanel" role="dialog" aria-modal="true" aria-label="Song list">
+  <div class="songs-box">
+    <button class="songs-close" id="closeSongs" aria-label="Close">✕</button>
+    <h2>पूरी प्लेलिस्ट</h2>
+    <p class="hint">Tap the song to play it.</p>
+    <div id="songList"></div>
+  </div>
+</div>
+
+<!-- Player -->
+<div class="player-bar" id="playerBar">
+  <div class="track-info">
+    <div class="art">
+      <svg class="iron" viewBox="0 0 48 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M4 30 C4 20 14 8 30 8 C40 8 44 16 44 22 C44 27 40 30 34 30 Z" fill="#F0DEB4"/>
+        <rect x="10" y="4" width="14" height="6" rx="2" fill="#2B2320"/>
+      </svg>
+      <div class="steam" aria-hidden="true"><span></span><span></span><span></span></div>
+    </div>
+    <div class="track-text">
+      <div class="t-title" id="tTitle">Lag Ja Gale</div>
+      <div class="t-artist" id="tArtist">Lata Mangeshkar</div>
+    </div>
+  </div>
+
+  <div class="controls-col">
+    <div class="transport">
+      <button class="ctrl-btn" id="prevBtn" aria-label="Restart song">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M6 6h2v12H6zM20 6L10 12l10 6z"/></svg>
+      </button>
+      <button class="ctrl-btn play-btn" id="playBtn" aria-label="Play">
+        <svg id="playIcon" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+      </button>
+      <button class="ctrl-btn" id="nextBtn" aria-label="Restart song">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M16 6h2v12h-2zM4 6l10 6L4 18z"/></svg>
+      </button>
+    </div>
+    <div class="progress-row">
+      <span id="curTime">0:00</span>
+      <div class="progress-track" id="progressTrack">
+        <div class="progress-fill" id="progressFill"></div>
+      </div>
+      <span id="durTime">0:00</span>
+    </div>
+  </div>
+
+  <div class="volume-col">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M3 10v4h4l5 5V5L7 10H3zm13.5 2A4.5 4.5 0 0 0 14 7.97v8.05A4.5 4.5 0 0 0 16.5 12z"/></svg>
+    <input type="range" class="vol-slider" id="volSlider" min="0" max="1" step="0.01" value="0.8" aria-label="Volume">
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<div id="youtubePlayer" style="width:100%;aspect-ratio:16/9;border-radius:14px;overflow:hidden;background:#000"></div>
+<script src="https://www.youtube.com/iframe_api"></script>
+
+
+
+<script>
+const songsPanel = document.getElementById("songsPanel");
+const songList = document.getElementById("songList");
+const tTitle = document.getElementById("tTitle");
+const tArtist = document.getElementById("tArtist");
+const playBtn = document.getElementById("playBtn");
+const prevBtn = document.getElementById("prevBtn");
+const nextBtn = document.getElementById("nextBtn");
+const playIcon = document.getElementById("playIcon");
+const progressTrack = document.getElementById("progressTrack");
+const progressFill = document.getElementById("progressFill");
+const curTime = document.getElementById("curTime");
+const durTime = document.getElementById("durTime");
+const volSlider = document.getElementById("volSlider");
+
+let songs = [];
+let currentIndex = 0;
+let player = null;
+let playerReady = false;
+
+function cleanSongName(title) {
+  let s = String(title || "").replace(/\s+/g, " ").trim();
+
+  // Remove common YouTube metadata / promotional suffixes.
+  s = s.replace(/\s*\|\s*(Full|Official|Original|HD|4K|Video).*$/i, "");
+  s = s.replace(/\s*[-–—]\s*(Full Video|Full Song|Official Video|Official Audio|Lyrics?|Lyrical|Video Song|Audio Song).*$/i, "");
+  s = s.replace(/\s*\(?\b(full video song|full video|full song|official video|official audio|video song|audio song|lyrics?|lyrical video|hd|4k)\b.*$/i, "");
+
+  // Remove bracketed/categorized credits that commonly follow a title.
+  s = s.replace(/\s*[\[(].*?[\])]\s*$/g, "");
+
+  // If the title uses "Song Name | Singer/Actor..." keep only the first segment.
+  if (s.includes("|")) s = s.split("|")[0].trim();
+
+  // Remove trailing separators left by cleanup.
+  s = s.replace(/\s*[-–—:|]+\s*$/, "").trim();
+
+  return s || String(title || "Unknown Song").trim();
+}
+
+function fmtTime(sec) {
+  if (!Number.isFinite(sec) || sec < 0) return "0:00";
+  return Math.floor(sec / 60) + ":" + String(Math.floor(sec % 60)).padStart(2, "0");
+}
+
+function setPlaying(playing) {
+  if (!playIcon || !playBtn) return;
+  playBtn.setAttribute("aria-label", playing ? "Pause" : "Play");
+  playIcon.innerHTML = playing
+    ? '<path d="M7 5h4v14H7zM13 5h4v14h-4z"/>'
+    : '<path d="M8 5v14l11-7z"/>';
+  document.getElementById("playerBar")?.classList.toggle("playing", playing);
+}
+
+function updateCurrentSong(index) {
+  const song = songs[index];
+  if (!song) return;
+  tTitle.textContent = cleanSongName(song.title);
+  tArtist.textContent = "YouTube";
+}
+
+function renderSongs() {
+  songList.innerHTML = "";
+  songs.forEach((song, i) => {
+    const row = document.createElement("div");
+    row.className = "song-row" + (i === currentIndex ? " active" : "");
+    row.innerHTML = `<div class="song-num">${String(i + 1).padStart(2, "0")}</div>
+      <div class="song-meta"><strong>${escapeHtml(cleanSongName(song.title))}</strong><span>YouTube</span></div>`;
+    row.addEventListener("click", () => playSong(i, true));
+    songList.appendChild(row);
+  });
+}
+
+function playSong(index, autoplay = true) {
+  if (!songs.length) return;
+  currentIndex = (index + songs.length) % songs.length;
+  updateCurrentSong(currentIndex);
+  renderSongs();
+
+  if (playerReady && player) {
+    if (autoplay) player.loadVideoById(songs[currentIndex].videoId);
+    else player.cueVideoById(songs[currentIndex].videoId);
+  }
+}
+
+function nextSong() {
+  playSong(currentIndex + 1, true);
+}
+
+function previousSong() {
+  if (playerReady && player && player.getCurrentTime() > 3) {
+    player.seekTo(0, true);
+    return;
+  }
+  playSong(currentIndex - 1, true);
+}
+
+function onPlayerStateChange(event) {
+  if (event.data === YT.PlayerState.PLAYING) setPlaying(true);
+  if (event.data === YT.PlayerState.PAUSED || event.data === YT.PlayerState.CUED) setPlaying(false);
+  if (event.data === YT.PlayerState.ENDED) {
+    setPlaying(false);
+    nextSong();
+  }
+}
+
+function createPlayer() {
+  if (player || !songs.length || !window.YT || !YT.Player) return;
+
+  player = new YT.Player("youtubePlayer", {
+    width: "1",
+    height: "1",
+    videoId: songs[currentIndex].videoId,
+    playerVars: {
+      autoplay: 0,
+      controls: 0,
+      rel: 0,
+      modestbranding: 1,
+      playsinline: 1
+    },
+    events: {
+      onReady: () => {
+        playerReady = true;
+        player.setVolume(Number(volSlider.value) * 100);
+        updateCurrentSong(currentIndex);
+      },
+      onStateChange: onPlayerStateChange,
+      onError: (e) => console.error("YouTube player error:", e.data)
+    }
+  });
+}
+
+window.onYouTubeIframeAPIReady = createPlayer;
+
+playBtn?.addEventListener("click", () => {
+  if (!playerReady || !player) return;
+  const state = player.getPlayerState();
+  if (state === YT.PlayerState.PLAYING || state === YT.PlayerState.BUFFERING) {
+    player.pauseVideo();
+  } else {
+    player.playVideo();
+  }
+});
+
+prevBtn?.addEventListener("click", previousSong);
+nextBtn?.addEventListener("click", nextSong);
+
+progressTrack?.addEventListener("click", (e) => {
+  if (!playerReady || !player) return;
+  const duration = player.getDuration();
+  if (!duration) return;
+  const r = progressTrack.getBoundingClientRect();
+  const ratio = Math.max(0, Math.min(1, (e.clientX - r.left) / r.width));
+  player.seekTo(duration * ratio, true);
+});
+
+volSlider?.addEventListener("input", () => {
+  if (playerReady && player) player.setVolume(Number(volSlider.value) * 100);
+});
+
+setInterval(() => {
+  if (!playerReady || !player) return;
+  try {
+    const current = player.getCurrentTime();
+    const duration = player.getDuration();
+    curTime.textContent = fmtTime(current);
+    durTime.textContent = fmtTime(duration);
+    if (duration > 0) progressFill.style.width = ((current / duration) * 100) + "%";
+  } catch (_) {}
+}, 500);
+
+document.getElementById("openSongs")?.addEventListener("click", () => {
+  renderSongs();
+  songsPanel.classList.add("open");
+});
+document.getElementById("openSongs2")?.addEventListener("click", () => {
+  renderSongs();
+  songsPanel.classList.add("open");
+});
+document.getElementById("closeSongs")?.addEventListener("click", () => songsPanel.classList.remove("open"));
+songsPanel.addEventListener("click", e => {
+  if (e.target === songsPanel) songsPanel.classList.remove("open");
+});
+
+function escapeHtml(v) {
+  return String(v).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+}
+
+async function loadSongs() {
+  try {
+    const response = await fetch("/api/songs");
+    if (!response.ok) throw new Error("Playlist API failed");
+    const data = await response.json();
+    songs = data.songs || [];
+
+    if (!songs.length) throw new Error("Playlist is empty");
+
+    updateCurrentSong(0);
+    renderSongs();
+
+    if (window.YT && YT.Player) createPlayer();
+  } catch (e) {
+    console.error(e);
+    songList.innerHTML = '<div style="padding:20px;text-align:center">❌ Playlist load nahi ho rahi.<br>Check API key and server.</div>';
+    tTitle.textContent = "Unable to load playlist";
+    tArtist.textContent = "";
+  }
+}
+
+loadSongs();
+</script>
+
+
+<script>
+function updateClock(){
+  const now = new Date();
+  document.getElementById("clock").textContent =
+    now.toLocaleTimeString([], {
+      hour: "2-digit",
+      minute: "2-digit",
+      second: "2-digit"
+    });
+}
+updateClock();
+setInterval(updateClock, 1000);
+</script>
+
+</body>
+</html>
