@@ -1,6 +1,6 @@
 ISTRI WALA RADIO - PERMANENT PLAYLIST VERSION
 
-The 15 MP3 songs are bundled with this project.
+A lot of MP3 songs are bundled with this project.
 There is NO Import Songs button.
 
 Keep this structure:
