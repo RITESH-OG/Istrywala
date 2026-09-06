@@ -111,6 +111,25 @@
   .pill:focus-visible{outline:3px solid var(--marigold); outline-offset:2px;}
   .pill.accent{background:var(--teal); border-color:transparent;}
   .pill.accent:hover{background:var(--teal-dark);}
+  .brand-icon{
+  width:20px;
+  height:20px;
+  flex:none;
+  display:block;
+}
+
+.spotify-pill,
+.ytmusic-pill{
+  gap:8px;
+}
+
+.spotify-pill:hover{
+  border-color:rgba(29,185,84,.55);
+}
+
+.ytmusic-pill:hover{
+  border-color:rgba(255,0,51,.55);
+}
 
   /* ---------- HERO ---------- */
   main.hero{
@@ -272,8 +291,22 @@
   </div>
   <div class="nav-cluster">
     <div class="pill-row">
-      <a class="pill" href="https://open.spotify.com/" target="_blank" rel="noopener noreferrer">🎧 Spotify</a>
-      <a class="pill" href="https://music.youtube.com/" target="_blank" rel="noopener noreferrer">▶ YT Music</a>
+     <a class="pill spotify-pill" href="https://open.spotify.com/" target="_blank" rel="noopener noreferrer">
+  <svg class="brand-icon spotify-icon" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="10" fill="#1DB954"/>
+    <path d="M7 9.2c3.5-1 7.2-.7 10.1.8M7.8 12.1c2.8-.7 5.8-.4 8.2.7M8.6 14.8c2-.4 4.2-.2 6 .5"
+      fill="none" stroke="#111" stroke-width="1.5" stroke-linecap="round"/>
+  </svg>
+  Spotify
+</a>
+
+<a class="pill ytmusic-pill" href="https://music.youtube.com/" target="_blank" rel="noopener noreferrer">
+  <svg class="brand-icon ytmusic-icon" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="10" fill="#FF0033"/>
+    <path d="M10 8.5v7l6-3.5z" fill="#fff"/>
+  </svg>
+  YT Music
+</a>
     </div>
     <div class="pill-row">
       <button class="pill" id="openSongs">Playlists</button>
