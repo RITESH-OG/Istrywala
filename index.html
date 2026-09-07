@@ -477,12 +477,66 @@ function previousSong() {
   playSong(currentIndex - 1, true);
 }
 
+let bufferingTimer = null;
+
 function onPlayerStateChange(event) {
-  if (event.data === YT.PlayerState.PLAYING) setPlaying(true);
-  if (event.data === YT.PlayerState.PAUSED || event.data === YT.PlayerState.CUED) setPlaying(false);
+
+  // Song is playing normally
+  if (event.data === YT.PlayerState.PLAYING) {
+    clearTimeout(bufferingTimer);
+    setPlaying(true);
+    return;
+  }
+
+  // User manually paused
+  if (event.data === YT.PlayerState.PAUSED) {
+    clearTimeout(bufferingTimer);
+    setPlaying(false);
+    return;
+  }
+
+  // Song finished
   if (event.data === YT.PlayerState.ENDED) {
+    clearTimeout(bufferingTimer);
     setPlaying(false);
     nextSong();
+    return;
+  }
+
+  // Song is buffering
+  if (event.data === YT.PlayerState.BUFFERING) {
+    clearTimeout(bufferingTimer);
+
+    bufferingTimer = setTimeout(() => {
+
+      if (
+        player &&
+        player.getPlayerState() === YT.PlayerState.BUFFERING
+      ) {
+        console.warn("Song stuck for 5 seconds. Skipping...");
+        nextSong();
+      }
+
+    }, 5000);
+
+    return;
+  }
+
+  // Song failed to start
+  if (event.data === YT.PlayerState.UNSTARTED) {
+    clearTimeout(bufferingTimer);
+
+    bufferingTimer = setTimeout(() => {
+
+      if (
+        player &&
+        player.getPlayerState() === YT.PlayerState.UNSTARTED
+      ) {
+        console.warn("Song failed to start. Skipping...");
+        nextSong();
+      }
+
+    }, 5000);
   }
 }
 
@@ -507,7 +561,15 @@ function createPlayer() {
         updateCurrentSong(currentIndex);
       },
       onStateChange: onPlayerStateChange,
-      onError: (e) => console.error("YouTube player error:", e.data)
+      onError: (e) => {
+  console.warn("Song cannot be played. Skipping to next song...", e.data);
+
+  clearTimeout(bufferingTimer);
+
+  setTimeout(() => {
+    nextSong();
+  }, 500);
+}
     }
   });
 }
